@@ -1,4 +1,4 @@
-const validateBody = (request, response, next) => {
+const validateTitle = (request, response, next) => {
   const { body } = request;
   if (body.title === undefined) {
     return response
@@ -12,4 +12,19 @@ const validateBody = (request, response, next) => {
     next();
   }
 };
-module.exports = { validateBody };
+
+const validateStatus = (request, response, next) => {
+  const { body } = request;
+  if (body.status === undefined) {
+    return response
+      .status(400)
+      .json({ message: 'O campo status e obrigatorio.' });
+  } else if (body.status === '') {
+    return response
+      .status(400)
+      .json({ message: 'O campo status nao pode ser vazio.' });
+  } else {
+    next();
+  }
+};
+module.exports = { validateTitle, validateStatus };
