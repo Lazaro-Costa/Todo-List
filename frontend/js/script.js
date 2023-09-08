@@ -91,6 +91,22 @@ const createRow = (task) => {
     delete
   </span>`,
   );
+
+  const editForm = createElement('form');
+  const editInput = createElement('input');
+
+  editInput.value = title;
+  editForm.appendChild(editInput);
+  editForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    updateTask({ id, title: editInput.value, status });
+  });
+
+  editButton.addEventListener('click', () => {
+    tdTitle.innerText = '';
+    tdTitle.appendChild(editForm);
+  });
+
   editButton.classList.add('btn-action');
   deleteButton.classList.add('btn-action');
 
